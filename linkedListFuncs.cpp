@@ -111,31 +111,31 @@ std::string linkedListToString(LinkedList *list) {
 void addIntToEndOfList(LinkedList *list, int value) {
   assert(list!=NULL); // if list is NULL, we can do nothing.
 
-  Node *p; // temporary pointer
+   // temporary pointer
 
   // TODO:
   // (1) Allocate a new node.  p will point to it.
-
-  p = NULL; // THIS IS PLACE-HOLDER LINE OF CODE.  DELETE IT AND REPLACE IT.
+  Node* p = new Node;
 
   // (2) Set p's data field to the value passed in
-  
+  p->data = value;
   // (3) Set p's next field to NULL
-
+  p->next = NULL;
 
   if (list->head == NULL) {
 
-    // (4) Make both head and tail of this list point to p
-    
+  // (4) Make both head and tail of this list point to p
+  list->head = p;
+  list->tail = p;
     
   } else {
 
     // Add p at the end of the list.   
 
     // (5) The current node at the tail? Make it point to p instead of NULL
-
+    list->tail->next = p;
     // (6) Make the tail of the list be p now.
-
+    list->tail = p;
   }
 
 }
@@ -147,20 +147,16 @@ void addIntToEndOfList(LinkedList *list, int value) {
 void addIntToStartOfList(LinkedList *list, int value) {
   assert(list!=NULL); // if list is NULL, we can do nothing.
 
-  // Add code for this.  
-  // HINTS:
-  //  You will need to allocate a new Node.
-  //  You will need two cases just as in addIntToEndOfList,
-  //  one for when list->head is NULL and another for when it is not.
-  // You need to consider how to make sure that list->head 
-  //   so that it points to the new node that you allocated.  
-  // And you will need to make sure that when you are done, 
-  //   that if the new node is now the ONLY thing on the list, 
-  //   that tail points to it also,
-  //   and that the new node is pointing to NULL.
-  // Otherwise, you'll need to be sure that when you are done
-  //   the head points to the new node you added, and that
-  //   the new node points to the node that *used* to be the head.
-  // The order in which you do things matters.
+  Node* p = new Node;
+  p->data = value;
+  p->next = NULL;
+  
+  if (list->head == NULL){
+    list->head = p;//if no item in the list, the p is the only item
+    list->tail = p;
+  }else{
+    p->next = list->head;// link the p to the old list
+    list->head  = p;// the p becomes the new link we want
+  }
 
 }
